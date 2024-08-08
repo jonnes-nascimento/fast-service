@@ -1,6 +1,5 @@
 package br.com.fiap.core.port.in;
 
-import br.com.fiap.core.domain.model.request.ProdutoCreateRequest;
 import br.com.fiap.core.domain.model.request.ProdutoUpdateRequest;
 import br.com.fiap.core.domain.model.response.ProdutoResponse;
 
