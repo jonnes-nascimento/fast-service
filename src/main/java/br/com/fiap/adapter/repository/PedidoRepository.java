@@ -9,13 +9,16 @@ import br.com.fiap.core.domain.model.request.PedidoUpdateRequest;
 import br.com.fiap.core.domain.model.response.PedidoResponse;
 import br.com.fiap.core.port.out.PedidoLoadOutputPort;
 import br.com.fiap.core.port.out.PedidoSaveOutputPort;
+import br.com.fiap.core.port.out.PedidoUpdateOutputPort;
 
 
 import java.util.List;
 
 public class PedidoRepository implements
         PedidoSaveOutputPort,
-        PedidoLoadOutputPort {
+        PedidoLoadOutputPort,
+        PedidoUpdateOutputPort
+{
 
     private final PedidoJpaRepository pedidoJpaRepository;
     private final PedidoMapper pedidoMapper;
@@ -43,10 +46,10 @@ public class PedidoRepository implements
             var pedidoJpa = pedidoJpaRepository.findById(pedidoUpdateRequest.id())
                     .orElseThrow(() -> new PedidoNotFoundException("Pedido não encontrado (ID: " + pedidoUpdateRequest.id() + ")"));
 
-            pedidoJpa..(pedidoUpdateRequest.categoria());
-            pedidoJpa.setDescricao(pedidoUpdateRequest.descricao());
-            pedidoJpa.setNome(pedidoUpdateRequest.nome());
-            pedidoJpa.setPreco(pedidoUpdateRequest.preco());
+            pedidoJpa.setCliente(pedidoUpdateRequest.cliente());
+            pedidoJpa.setNumero(pedidoUpdateRequest.numero());
+            pedidoJpa.setStatusPedido(pedidoUpdateRequest.statusPedido());
+            pedidoJpa.setProdutos(pedidoUpdateRequest.produtos());
 
             pedidoJpa = pedidoJpaRepository.save(pedidoJpa);
 
@@ -70,12 +73,5 @@ public class PedidoRepository implements
                 .stream()
                 .map(pedidoMapper::toPedidoResponse)
                 .toList();
-    }
-
-    @Override
-    public void delete(int id) {
-        var pedidoJpa = pedidoJpaRepository.findById(id)
-                .orElseThrow(() -> new PedidoNotFoundException("Pedido não encontrado (ID: " + id + ")"));
-        pedidoJpaRepository.delete(pedidoJpa);
     }
 }

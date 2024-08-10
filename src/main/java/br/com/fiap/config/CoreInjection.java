@@ -2,10 +2,13 @@ package br.com.fiap.config;
 
 import br.com.fiap.adapter.integration.MercadoPagoServiceMock;
 import br.com.fiap.adapter.repository.ClienteRepository;
+import br.com.fiap.adapter.repository.PedidoRepository;
 import br.com.fiap.adapter.repository.ProdutoRepository;
 import br.com.fiap.adapter.repository.jpa.ClienteJpaRepository;
+import br.com.fiap.adapter.repository.jpa.PedidoJpaRepository;
 import br.com.fiap.adapter.repository.jpa.ProdutoJpaRepository;
 import br.com.fiap.adapter.repository.mapper.ClienteMapper;
+import br.com.fiap.adapter.repository.mapper.PedidoMapper;
 import br.com.fiap.adapter.repository.mapper.ProdutoMapper;
 import br.com.fiap.core.port.in.*;
 import br.com.fiap.core.port.out.*;
@@ -104,6 +107,48 @@ public class CoreInjection {
     @Bean
     public ProdutoLoadInputPort produtoLoadInputPort(ProdutoLoadOutputPort produtoLoadOutputPort) {
         return new ProdutoLoadUseCase(produtoLoadOutputPort);
+    }
+
+    /*****************************************************
+     * PEDIDO
+     *****************************************************/
+
+    @Bean
+    public PedidoSaveOutputPort pedidoSaveOutputPort(PedidoJpaRepository pedidoJpaRepository,
+                                                       PedidoMapper pedidoMapper) {
+        return new PedidoRepository(pedidoJpaRepository,
+                pedidoMapper);
+    }
+
+    @Bean
+    public PedidoUpdateOutputPort pedidoUpdateOutputPort(PedidoJpaRepository pedidoJpaRepository,
+                                                         PedidoMapper pedidoMapper) {
+        return new PedidoRepository(pedidoJpaRepository,
+                pedidoMapper);
+    }
+
+
+    @Bean
+    public PedidoLoadOutputPort pedidoLoadOutputPort(PedidoJpaRepository pedidoJpaRepository,
+                                                       PedidoMapper pedidoMapper) {
+        return new PedidoRepository(pedidoJpaRepository,
+                pedidoMapper);
+    }
+
+    @Bean
+    public PedidoCreateInputPort pedidoCreateInputPort(PedidoSaveOutputPort pedidoSaveOutputPort) {
+        return new PedidoCreateUseCase(pedidoSaveOutputPort);
+    }
+
+    @Bean
+    public PedidoUpdateInputPort pedidoUpdateInputPort(PedidoUpdateOutputPort pedidoUpdateOutputPort) {
+        return new PedidoUpdateUseCase(pedidoUpdateOutputPort);
+    }
+
+
+    @Bean
+    public PedidoLoadInputPort pedidoLoadInputPort(PedidoLoadOutputPort pedidoLoadOutputPort) {
+        return new PedidoLoadUseCase(pedidoLoadOutputPort);
     }
 
 }
