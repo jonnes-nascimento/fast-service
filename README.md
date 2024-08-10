@@ -13,5 +13,3 @@ http://localhost:8080/swagger-ui/index.html
     username: fast-service-user
     password: fs2024
 
-### Documentação de integração com o Mercado Pago:
-https://www.mercadopago.com.br/developers/pt/docs/qr-code/pre-requisites

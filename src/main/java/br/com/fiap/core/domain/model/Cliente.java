@@ -15,6 +15,9 @@ public class Cliente {
 
     public Cliente(String nome, String cpf, String email) {
 
+        cpf = cpf.replace(".", "");
+        cpf = cpf.replace("-", "");
+
         if (!this.cpfValido(cpf))
             throw new CpfInvalidException("O CPF informado é inválido");
 
@@ -36,6 +39,10 @@ public class Cliente {
     }
 
     public void setCpf(String cpf) {
+
+        cpf = cpf.replace(".", "");
+        cpf = cpf.replace("-", "");
+
         if (!this.cpfValido(cpf))
             throw new CpfInvalidException("O CPF informado é inválido");
         this.cpf = cpf;
@@ -61,9 +68,6 @@ public class Cliente {
 //                cpf.equals("66666666666") || cpf.equals("77777777777") ||
 //                cpf.equals("88888888888") || cpf.equals("99999999999"))
 //            return (false);
-
-        cpf = cpf.replace(".", "");
-        cpf = cpf.replace("-", "");
 
         try {
             Long.parseLong(cpf);

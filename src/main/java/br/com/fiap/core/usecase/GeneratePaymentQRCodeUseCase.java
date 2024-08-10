@@ -1,6 +1,6 @@
 package br.com.fiap.core.usecase;
 
-import br.com.fiap.core.domain.model.PaymentQRCodeRequest;
+import br.com.fiap.core.domain.model.request.PaymentQRCodeRequest;
 import br.com.fiap.core.port.in.GeneratePaymentQRCodeInputPort;
 import br.com.fiap.core.port.out.FetchPaymentQRCodeOutputPort;
 

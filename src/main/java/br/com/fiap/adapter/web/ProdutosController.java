@@ -142,7 +142,9 @@ public class ProdutosController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
 
-        produtoResponse.forEach(produto -> produto.setPath(String.format("%s/%s", request.getRequestURL().toString(), produto.getId())));
+        produtoResponse.forEach(produto -> produto.setPath(String.format("%s/%s",
+                request.getRequestURL().toString().replace("/all", ""),
+                produto.getId())));
 
         AppResponse<List<ProdutoResponse>> response = ResponseUtil.success(produtoResponse,
                 "Lista de produtos encontrados na base de dados",
