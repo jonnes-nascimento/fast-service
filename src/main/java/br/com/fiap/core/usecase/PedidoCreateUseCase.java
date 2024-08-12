@@ -17,14 +17,6 @@ public class PedidoCreateUseCase implements PedidoCreateInputPort {
 
     @Override
     public PedidoResponse create(PedidoCreateRequest pedidoCreateRequest) {
-
-        var pedido = new Pedido(
-                pedidoCreateRequest.cliente(),
-                pedidoCreateRequest.numero(),
-                pedidoCreateRequest.statusPedido(),
-                pedidoCreateRequest.produtos()
-        );
-
-        return pedidoSaveOutputPort.save(pedido);
+        return pedidoSaveOutputPort.save(pedidoCreateRequest);
     }
 }

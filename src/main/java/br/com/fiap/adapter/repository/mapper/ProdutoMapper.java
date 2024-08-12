@@ -6,6 +6,8 @@ import br.com.fiap.core.domain.model.response.ProdutoResponse;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ProdutoMapper {
 
@@ -36,5 +38,17 @@ public class ProdutoMapper {
                 produtoJpa.getPreco(),
                 Strings.EMPTY
         );
+    }
+
+    public List<Produto> toProdutoList(List<ProdutoJpa> produtoJpaList) {
+        return produtoJpaList.stream()
+                .map(this::toProduto)
+                .toList();
+    }
+
+    public List<ProdutoJpa> toProdutoJpaList(List<Produto> produtoList) {
+        return produtoList.stream()
+                .map(this::toProdutoJpa)
+                .toList();
     }
 }

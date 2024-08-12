@@ -115,23 +115,23 @@ public class CoreInjection {
 
     @Bean
     public PedidoSaveOutputPort pedidoSaveOutputPort(PedidoJpaRepository pedidoJpaRepository,
-                                                       PedidoMapper pedidoMapper) {
+                                                     ClienteJpaRepository clienteJpaRepository,
+                                                     ProdutoJpaRepository produtoJpaRepository,
+                                                     PedidoMapper pedidoMapper) {
         return new PedidoRepository(pedidoJpaRepository,
+                clienteJpaRepository,
+                produtoJpaRepository,
                 pedidoMapper);
     }
-
-    @Bean
-    public PedidoUpdateOutputPort pedidoUpdateOutputPort(PedidoJpaRepository pedidoJpaRepository,
-                                                         PedidoMapper pedidoMapper) {
-        return new PedidoRepository(pedidoJpaRepository,
-                pedidoMapper);
-    }
-
 
     @Bean
     public PedidoLoadOutputPort pedidoLoadOutputPort(PedidoJpaRepository pedidoJpaRepository,
-                                                       PedidoMapper pedidoMapper) {
+                                                     ClienteJpaRepository clienteJpaRepository,
+                                                     ProdutoJpaRepository produtoJpaRepository,
+                                                     PedidoMapper pedidoMapper) {
         return new PedidoRepository(pedidoJpaRepository,
+                clienteJpaRepository,
+                produtoJpaRepository,
                 pedidoMapper);
     }
 
@@ -139,12 +139,6 @@ public class CoreInjection {
     public PedidoCreateInputPort pedidoCreateInputPort(PedidoSaveOutputPort pedidoSaveOutputPort) {
         return new PedidoCreateUseCase(pedidoSaveOutputPort);
     }
-
-    @Bean
-    public PedidoUpdateInputPort pedidoUpdateInputPort(PedidoUpdateOutputPort pedidoUpdateOutputPort) {
-        return new PedidoUpdateUseCase(pedidoUpdateOutputPort);
-    }
-
 
     @Bean
     public PedidoLoadInputPort pedidoLoadInputPort(PedidoLoadOutputPort pedidoLoadOutputPort) {
