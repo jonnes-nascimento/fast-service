@@ -21,10 +21,10 @@ spring:
     password: "fs2024"
 
   jpa:
-    open-in-view: true
     hibernate:
       ddl-auto: update
     show-sql: false
+    open-in-view: true
 
 logging:
   level:

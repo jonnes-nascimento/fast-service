@@ -1,0 +1,39 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:13.1-alpine
+    container_name: dbv1
+    environment:
+      - POSTGRES_USER=fast-service-user
+      - POSTGRES_PASSWORD=fs2024
+      - POSTGRES_DATABASE=fast-service
+    ports:
+      - 5432:5432
+    volumes:
+      - ./dataset:/docker-entrypoint-initdb.d
+    networks:
+      fast-service-postgres-net:
+    restart: always
+
+  application:
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/fast-service
+      SPRING_DATASOURCE_USERNAME: fast-service-user
+      SPRING_DATASOURCE_PASSWORD: fs2024
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      server.port: 8080
+      server.address: 0.0.0.0
+    container_name: fast-service
+    ports:
+      - 8080:8080
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks:
+      fast-service-postgres-net:
+    restart: on-failure
+
+networks:
+  fast-service-postgres-net:
