@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "4dbaf378-2d75-4313-909f-247348825ee0",
 		"name": "Fast-Service",
+		"description": "FIAP - Tech Challenge - Fase 1\n\nEndpoints para teste da aplicação Fast-Service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6140973",
 		"_collection_link": "https://mutinybr.postman.co/workspace/FIAP~2bea1bf2-837b-4b74-b7f0-6606acf75250/collection/6140973-4dbaf378-2d75-4313-909f-247348825ee0?action=share&source=collection_link&creator=6140973"
@@ -20,7 +21,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"nome\": \"Sir Isaac Newton\",\r\n  \"cpf\": \"22222222222\",\r\n  \"email\": \"newtao@dominio.com\"\r\n}",
+									"raw": "{\r\n  \"nome\": \"Jonnes Nascimento\",\r\n  \"cpf\": \"303.471.668-06\",\r\n  \"email\": \"jonnes@dominio.com\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -82,45 +83,6 @@
 			]
 		},
 		{
-			"name": "Teste",
-			"item": [
-				{
-					"name": "test-exception",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{server}}/test-exception",
-							"host": [
-								"{{server}}"
-							],
-							"path": [
-								"test-exception"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "test",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{server}}/",
-							"host": [
-								"{{server}}"
-							],
-							"path": [
-								""
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Produto",
 			"item": [
 				{
@@ -133,7 +95,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"categoria\": \"LANCHE\",\r\n  \"nome\": \"X-Salada\",\r\n  \"descricao\": \"Hamburguer de carne, queijo e salada\",\r\n  \"preco\": 29.00\r\n}",
+									"raw": "{\r\n  \"categoria\": \"SOBREMESA\",\r\n  \"nome\": \"Torta\",\r\n  \"descricao\": \"Torta de Banana\",\r\n  \"preco\": 13.00\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -219,7 +181,7 @@
 							"response": []
 						},
 						{
-							"name": "produtos/categoria",
+							"name": "produtos?categoria",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -262,6 +224,258 @@
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "pedidos",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cliente_id\": 9,\r\n    \"numero\": \"PED0001\",\r\n    \"status_pedido\": \"AGUARDANDO_PAGAMENTO\",\r\n    \"produtos_id\": [1, 3, 5, 7]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/v1/pedidos",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"v1",
+										"pedidos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "pedidos/all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/v1/pedidos/all",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"v1",
+										"pedidos",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "pedidos?status",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/pedidos?status=AGUARDANDO_PAGAMENTO",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"pedidos"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "AGUARDANDO_PAGAMENTO"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "pedidos/numero",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/pedidos/PED0001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"pedidos",
+										"PED0001"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Teste",
+			"item": [
+				{
+					"name": "Mercado Pago",
+					"item": [
+						{
+							"name": "Criar Pagamento",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Idempotency-Key",
+										"value": "0d5020ed-1af6-469c-ae06-c3bec19954bb",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"installments\": 1,\r\n    \"payer\": {\r\n        \"email\": \"jonnes.nascimento@gmail.com\",\r\n        \"identification\": {\r\n            \"type\": \"CPF\",\r\n            \"number\": \"30347166806\"\r\n        }\r\n    },\r\n    \"token\": \"ff8080814c11e237014c1ff593b57b4d\",\r\n    \"transaction_amount\": 38.5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Criar QR Code",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Titulo do Pedido\",\r\n    \"description\": \"Pedido teste\",\r\n    \"external_reference\": \"PEDIDO001\",\r\n    \"total_amount\": 38.5,\r\n    \"items\": [\r\n        {\r\n            \"title\": \"McLanche\",\r\n            \"description\": \"McLanche Feliz\",\r\n            \"total_amount\": 38.5,\r\n            \"unit_measure\": \"unit\",\r\n            \"quantity\": 1,\r\n            \"unit_price\": 38.5\r\n        }\r\n    ],\r\n    \"sponsor\": {\r\n        \"id\": 6299294\r\n    },\r\n    \"cash_out\": {\r\n        \"amount\": 0\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/instore/orders/qr/seller/collectors/6299294/pos/SUC001POS001/qrs",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"instore",
+										"orders",
+										"qr",
+										"seller",
+										"collectors",
+										"6299294",
+										"pos",
+										"SUC001POS001",
+										"qrs"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "TEST-5117710421851424-081011-1a91d690c2b0e6e5132e1c3e8a6a5acb-6299294",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "test-exception",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/test-exception",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"test-exception"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
