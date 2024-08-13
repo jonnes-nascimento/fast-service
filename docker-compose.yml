@@ -1,8 +1,11 @@
-version: '3'
+
+networks:
+  fast-service-network:
+
 services:
   postgres:
     image: postgres:13.1-alpine
-    container_name: dbv1
+    container_name: fast-service-database
     environment:
       - POSTGRES_USER=fast-service-user
       - POSTGRES_PASSWORD=fs2024
@@ -12,12 +15,18 @@ services:
     volumes:
       - ./dataset:/docker-entrypoint-initdb.d
     networks:
-      fast-service-postgres-net:
+      fast-service-network:
     restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d fast-service -U fast-service-user" ]
+      interval: 10s
+      retries: 5
+      timeout: 30s
 
   application:
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/fast-service
       SPRING_DATASOURCE_USERNAME: fast-service-user
@@ -25,15 +34,12 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       server.port: 8080
       server.address: 0.0.0.0
-    container_name: fast-service
+    container_name: fast-service-application
     ports:
       - 8080:8080
     build:
       context: ./
       dockerfile: Dockerfile
     networks:
-      fast-service-postgres-net:
+      fast-service-network:
     restart: on-failure
-
-networks:
-  fast-service-postgres-net:
