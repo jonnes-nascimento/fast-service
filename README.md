@@ -26,7 +26,7 @@ O comando acima gerará o jar da aplicação no diretório target.
 ### 2. Executar o Docker Compose
 Executar o seguinte comando para inicializar os containeres da aplicação, na raíz do projeto (onde se encontra o arquivo docker-compose.yml):
 
-    docker-compose up
+    docker-compose up --build
 
 ### 3. Acessar a aplicação
 A aplicação estará disponível na seguinte URL:
