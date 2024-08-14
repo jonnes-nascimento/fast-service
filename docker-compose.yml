@@ -24,6 +24,8 @@ services:
       timeout: 30s
 
   application:
+    image: fast-service:1.0
+    container_name: fast-service-application
     depends_on:
       postgres:
         condition: service_healthy
@@ -34,10 +36,8 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       server.port: 8080
       server.address: 0.0.0.0
-    container_name: fast-service-application
     ports:
       - 8080:8080
-    image: fast-service:1.0
     build:
       context: ./
       dockerfile: Dockerfile
