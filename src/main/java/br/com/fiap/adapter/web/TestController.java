@@ -22,7 +22,7 @@ public class TestController {
             @ApiResponse(responseCode = "200", description = "OK!")
     })
     public ResponseEntity<String> checkOk() {
-        return ResponseEntity.ok("Here's everything OK! (v1.0)");
+        return ResponseEntity.ok("Here's everything OK! (Fast-Service v1.0)");
     }
 
     @GetMapping(value = "/test-exception",

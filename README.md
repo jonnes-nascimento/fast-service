@@ -16,17 +16,17 @@ https://miro.com/app/board/uXjVK39qXjg=/?share_link_id=216852517891
 
 ## Para executar a aplicação:
 
-### 1. Fazer o build da aplicação pelo Maven
-Executar o seguinte comando na raíz do projeto:
+### 1. Fazer o build dos containeres da aplicação:
+Executar o seguinte comando:
     
-    mvn clean install -DskipTests
+    docker compose build --no-cache
 
-O comando acima gerará o jar da aplicação no diretório target.
+O comando acima gerará os conteineres de aplicação e banco de dados.
 
-### 2. Executar o Docker Compose
+### 2. Executar a aplicação através dos containeres criados:
 Executar o seguinte comando para inicializar os containeres da aplicação, na raíz do projeto (onde se encontra o arquivo docker-compose.yml):
 
-    docker-compose up --build
+    docker compose up
 
 ### 3. Acessar a aplicação
 A aplicação estará disponível na seguinte URL:
