@@ -37,6 +37,7 @@ services:
     container_name: fast-service-application
     ports:
       - 8080:8080
+    image: fast-service:1.0
     build:
       context: ./
       dockerfile: Dockerfile
