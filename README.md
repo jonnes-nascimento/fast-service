@@ -42,5 +42,5 @@ Para facilitar o acesso aos endpoints, disponibilizamos a seguinte collection pa
 ### Informações banco de dados:
     database-name: fast-service
     username: fast-service-user
-    password: fs2024
+    password: fs2025
 

@@ -8,7 +8,7 @@ services:
     container_name: fast-service-database
     environment:
       - POSTGRES_USER=fast-service-user
-      - POSTGRES_PASSWORD=fs2024
+      - POSTGRES_PASSWORD=fs2025
       - POSTGRES_DATABASE=fast-service
     ports:
       - 5432:5432
@@ -32,7 +32,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/fast-service
       SPRING_DATASOURCE_USERNAME: fast-service-user
-      SPRING_DATASOURCE_PASSWORD: fs2024
+      SPRING_DATASOURCE_PASSWORD: fs2025
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       server.port: 8080
       server.address: 0.0.0.0
